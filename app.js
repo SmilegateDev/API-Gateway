@@ -4,9 +4,8 @@ const path = require('path');
 const session = require('express-session');
 const morgan = require('morgan');
 const userServiceProxy = httpProxy('https://porxy-middlewares');
+
 require('dotenv').config();
-
-
 const auth = require('./routes/auth');
 //const test = require('./routes/test');
 
@@ -37,7 +36,7 @@ app.use(session({
   }));
 
 
-app.use('/auth',auth);
+app.use('/auth', auth);
 
 app.use((req, res, next) => {
     //Todo : Authentication
