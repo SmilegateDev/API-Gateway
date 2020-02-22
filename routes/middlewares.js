@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const RateLimit = require('express-rate-limit');
-
+const client = require('../cache_redis');
 
 exports.verifyToken = (req, res, next) => {
     try{
