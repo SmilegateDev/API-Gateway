@@ -11,7 +11,7 @@ const api = apiAdpater(BASE_URL);
 
 
 router.post('/join', (req, res)=>{
-    api.post(req.path)
+    api.post(req.path,req.body)
         .then(resp =>{
           return res.status(200).send(resp.data);
         })
@@ -26,10 +26,13 @@ router.get('/confirmEmail', (req, res)=>{
 
 
 router.post('/login', (req, res)=>{
-  api.post(req.path)
+  api.post(req.path,req.body)
       .then(resp =>{
         return res.status(200).send(resp.data);
       })
+      .catch(err=>{
+        console.log(err.message);
+      });
 });
 
 router.get('/kakao', (req, res)=>{
@@ -37,6 +40,9 @@ router.get('/kakao', (req, res)=>{
       .then(resp =>{
         return res.status(200).send(resp.data);
       })
+      .catch(err=>{
+        console.log(err.message);
+      });
 });
 
 module.exports = router;
