@@ -10,14 +10,14 @@ const router = express.Router();
 const api = apiAdpater(BASE_URL);
 
 
-router.post('/join', (req, res)=>{
+router.post('/join', apiLimiter, (req, res)=>{
     api.post(req.path,req.body)
         .then(resp =>{
           return res.status(200).send(resp.data);
         })
 });
 
-router.get('/confirmEmail', (req, res)=>{
+router.get('/confirmEmail', apiLimiter, (req, res)=>{
   api.get(req.path)
       .then(resp =>{
         return res.status(200).send(resp.data);
@@ -25,7 +25,7 @@ router.get('/confirmEmail', (req, res)=>{
 });
 
 
-router.post('/login', (req, res)=>{
+router.post('/login', apiLimiter, (req, res)=>{
   api.post(req.path,req.body)
       .then(resp =>{
         return res.status(200).send(resp.data);
@@ -35,8 +35,18 @@ router.post('/login', (req, res)=>{
       });
 });
 
-router.get('/kakao', (req, res)=>{
+router.get('/kakao', apiLimiter, (req, res)=>{
   api.get(req.path)
+      .then(resp =>{
+        return res.status(200).send(resp.data);
+      })
+      .catch(err=>{
+        console.log(err.message);
+      });
+});
+
+router.get('/token', verifyToken, apiLimiter, (req, res)=>{
+  api.get(req.path, req.data)
       .then(resp =>{
         return res.status(200).send(resp.data);
       })
