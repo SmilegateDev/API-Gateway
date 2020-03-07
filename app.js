@@ -25,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
+//세션을 이용
 app.use(session({
     resave: false,
     saveUninitialized: false,
