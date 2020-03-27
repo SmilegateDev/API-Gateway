@@ -11,6 +11,7 @@ const router = express.Router();
 const api = apiAdpater(BASE_URL);
 
 
+
 router.post('/join', apiLimiter, (req, res)=>{
     api.post(req.path,req.body)
         .then(resp =>{
@@ -24,6 +25,8 @@ router.post('/join', apiLimiter, (req, res)=>{
           });
         })
 });
+
+
 
 router.get('/confirmEmail', apiLimiter, (req, res)=>{
   console.log(req.path+req.query);
@@ -41,31 +44,25 @@ router.get('/confirmEmail', apiLimiter, (req, res)=>{
 });
 
 
-router.post('/login', apiLimiter, (req, res)=>{
-  if(req.session.user){
-    res.body.refreshToken = req.session.user.refreshToken;
-    return res.redirect('/token');
-  }
-  
-  else{
-    api.post(req.path,req.body)
-        .then(resp =>{
-          if(res.code == 200)
-            req.session.user=
-            {
-              refreshToken : resp.data.refreshToken
-            }
-            return res.status(200).json(resp.data);
 
+
+router.get('/login', apiLimiter, (req, res)=>{
+  api.post(req.path,req.body)
+      .then(resp =>{
+        if(res.code == 200)
+          req.session.user=
+          {
+            refreshToken : resp.data.refreshToken
+          }
+          return res.status(200).json(resp.data);
+      })
+      .catch(err=>{
+        console.log(err.message);
+        return res.status(500).json({
+          code : 500,
+          msg : "유저가 이미 존재합니다!0"
         })
-        .catch(err=>{
-          console.log(err.message);
-          return res.status(500).json({
-            code : 500,
-            msg : "유저가 이미 존재합니다!0"
-          })
-        });
-  }
+      });
 });
 
 
