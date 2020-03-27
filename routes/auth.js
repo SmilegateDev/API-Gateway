@@ -13,7 +13,7 @@ const api = apiAdpater(BASE_URL);
 
 
 router.post('/join', apiLimiter, (req, res)=>{
-    api.post(req.path,req.body)
+    api.post(req.path,req.body,req.headers)
         .then(resp =>{
           return res.status(200).send(resp.data);
         })
@@ -47,7 +47,7 @@ router.get('/confirmEmail', apiLimiter, (req, res)=>{
 
 
 router.get('/login', apiLimiter, (req, res)=>{
-  api.post(req.path,req.body)
+  api.post(req.path,req.body,req.headers)
       .then(resp =>{
         if(res.code == 200)
           req.session.user=
@@ -115,7 +115,7 @@ router.get('/kakao', apiLimiter, (req, res)=>{
 });
 
 router.get('/token', verifyToken, apiLimiter, (req, res)=>{
-  api.get(req.path, req.data)
+  api.get(req.path, req.data,req.headers)
       .then(resp =>{
         return res.status(200).json(resp.data);
       })

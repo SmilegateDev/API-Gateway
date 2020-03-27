@@ -13,7 +13,7 @@ const api = apiAdpater(BASE_URL);
 
 
 router.post('/create', apiLimiter, (req, res)=>{
-    api.post(req.path,req.body)
+    api.post(req.path,req.bod,req.headersy)
         .then(resp =>{
           return res.status(200).send(resp.data);
         })
@@ -28,7 +28,7 @@ router.post('/create', apiLimiter, (req, res)=>{
 
 
 router.get('/getMyPost', apiLimiter, (req, res)=>{
-  api.post(req.path,req.body)
+  api.post(req.path,req.body,req.headers)
       .then(resp =>{
         return res.status(200).send(resp.data);
       })
@@ -43,7 +43,7 @@ router.get('/getMyPost', apiLimiter, (req, res)=>{
 
 
 router.post('/getUserPost', apiLimiter, (req, res)=>{
-  api.post(req.path,req.body)
+  api.post(req.path,req.body,req.headers)
       .then(resp =>{
         return res.status(200).send(resp.data);
       })
@@ -57,7 +57,7 @@ router.post('/getUserPost', apiLimiter, (req, res)=>{
 });
 
 router.post('/getReply', apiLimiter, (req, res)=>{
-  api.post(req.path,req.body)
+  api.post(req.path,req.body,req.headers)
       .then(resp =>{
         return res.status(200).send(resp.data);
       })
@@ -72,7 +72,7 @@ router.post('/getReply', apiLimiter, (req, res)=>{
 
 
 router.post('/ceateReply', apiLimiter, (req, res)=>{
-  api.post(req.path,req.body)
+  api.post(req.path,req.body,req.headers)
       .then(resp =>{
         return res.status(200).send(resp.data);
       })
