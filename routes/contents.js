@@ -6,7 +6,7 @@ const apiAdpater = require('./apiAdapter');
 const qs = require('qs');
 
 const { verifyToken, apiLimiter } = require('./middlewares');
-const BASE_URL = 'http://localhost:8002/api/contents'; //여기에 나중에 auth 같은거 붙여서 prefix 사용할수있음
+const BASE_URL = 'http://'+process.env.CONTENTS_URL+'/api/auth'; //여기에 나중에 auth 같은거 붙여서 prefix 사용할수있음; //여기에 나중에 auth 같은거 붙여서 prefix 사용할수있음
 const router = express.Router();
 const api = apiAdpater(BASE_URL);
 
