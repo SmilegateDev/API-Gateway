@@ -7,6 +7,8 @@ const userServiceProxy = httpProxy('https://porxy-middlewares');
 
 require('dotenv').config();
 const auth = require('./routes/auth');
+const posts = require('./routes/posts');
+const feed = require('./routes/feed');
 //const test = require('./routes/test');
 
 
@@ -38,6 +40,8 @@ app.use(session({
 
 
 app.use('/auth', auth);
+app.use('/feed', feed);
+app.use('/posts', posts);
 
 app.use((req, res, next) => {
     //Todo : Authentication
